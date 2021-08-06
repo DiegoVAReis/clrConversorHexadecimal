@@ -53,7 +53,7 @@ Após os passos acima, já será possível utilizar a função, veja que ela fic
 
 A função pode ser utilizada como uma função normal do banco de dados, a diferença é que você não possui acesso ao fonte dela, ou seja, se você abrir a função com o comando `sp_helptext` você verá que a função está "vazia". 
 
-Veja como passar os dados para que a função processe, é necessário passar o texto a ser convertido, passar o tipo de conversão, onde temos duas opções "" e "", e por fim devemos passar qual o separador que aqueles hexadecimals terão, a função aceita os seguintes separadores "_", ":", ";", "|" e "-". 
+Veja como passar os dados para que a função processe, é necessário passar o texto a ser convertido, passar o tipo de conversão, onde temos duas opções "" e "", e por fim devemos passar qual o separador que aqueles hexadecimals terão, a função aceita os seguintes separadores "`_`", "`:`", "`;`", "`|`" e "`-`". 
 
 OBs: é necessário obrigatoriamente ter um separador, caso seja necessário você poderá customizar a função da forma que preferir mudando o separador, ou retirando a sua necessidade, porém lembre-se de ajustar os locais no qual validam 3 casos decimais, do contrário a função não terá o resultado esperado.
 
