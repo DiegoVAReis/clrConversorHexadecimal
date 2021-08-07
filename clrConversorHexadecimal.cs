@@ -9,7 +9,7 @@ public partial class UserDefinedFunctions
     {
         /////////////////////////////////////////////////////////////////////////////////////////////
         //                                                                                         //
-        //  FunÁ„o Main --> Respons·vel por direcionar o Fluxo para as outras funÁıes internas.    //
+        //  Fun√ß√£o Main --> Respons√°vel por direcionar o Fluxo para as outras fun√ß√µes internas.    //
         //  Desenvolvido por: https://github.com/DiegoVAReis                                       //
         //                                                                                         //
         /////////////////////////////////////////////////////////////////////////////////////////////
@@ -26,15 +26,18 @@ public partial class UserDefinedFunctions
                 if (sTypeConvert == "convertHex")
                 {
                     // --> CONVERTER EM HEXADECIMAL
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                     // --> Primeiro converte tudo para string para depois converter para hexadecimal, assim mantem toda a string num mesmo formato.
                     sTextConvert = ConvertHexadecimalToString(sTextConvert, sSeparator);
 
-                    // --> ApÛs tudo estar na mesma base È convertido em hexadecimal separando pelo separador passado (um sepador v·lido)
+                    // --> Ap√≥s tudo estar na mesma base √© convertido em hexadecimal separando pelo separador passado (um sepador v√°lido)
                     sReturn = ConvertStringToHexadecimal(sTextConvert, sSeparator);
                 }
                 else if (sTypeConvert == "convertString")
-                {
+                {   
+                    // --> CONVERTER EM STRING
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                     // --> Convertendo o Hexadecimal para string
                     sReturn = ConvertHexadecimalToString(sTextConvert, sSeparator);
@@ -46,12 +49,12 @@ public partial class UserDefinedFunctions
                 }
                 else
                 {
-                    sReturn = "Tipo de convers„o incorreto";
+                    sReturn = "Tipo de convers√£o incorreto";
                 }
             }
             else
             {
-                sReturn = "Tipo de separador incorreto, apenas os separadores (_ - : ; |) s„o v·lidos.";
+                sReturn = "Tipo de separador incorreto, apenas os separadores (_ - : ; |) s√£o v√°lidos.";
             }
 
             return sReturn;
@@ -161,7 +164,7 @@ public partial class UserDefinedFunctions
 
         ////////////////////////////////////////////////////////////////
         //                                                            //
-        // --> FunÁ„o para converter o Hexadecimal em String.         //
+        // --> Fun√ß√£o para converter o Hexadecimal em String.         //
         //                                                            //
         ////////////////////////////////////////////////////////////////
 
@@ -188,14 +191,14 @@ public partial class UserDefinedFunctions
     {
         ////////////////////////////////////////////////////////////////
         //                                                            //
-        // --> FunÁ„o que valide se o texto passado È um hexadecimal  //
+        // --> Fun√ß√£o que valide se o texto passado √© um hexadecimal  //
         //                                                            //
         ////////////////////////////////////////////////////////////////
 
-        // --> Express„o regular com os caracteres aceitos de um hexadecimal.
+        // --> Express√£o regular com os caracteres aceitos de um hexadecimal.
         Regex regHexadecimal = new Regex(@"^[0-9A-Fa-f]");
 
-        // --> Como nos colocamos um separador de 1 caractere, teria que ter no minimo 3 digitos.
+        // --> Como colocamos um separador de 1 caractere, teria que ter no minimo 3 d√≠gitos para ser hexadecimal
         if (sText.Length == 3)
         {
             return (sText[0].ToString() == sSeparator) && regHexadecimal.IsMatch(sText[1].ToString()) && regHexadecimal.IsMatch(sText[2].ToString());

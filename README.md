@@ -20,7 +20,7 @@ Passo 2.
 
 Abra o CMD e entre na pasta na qual você esta com o arquivo clrConversorHexadecimal.cs, como no exemplo abaixo:
 
-Após estar na pasta basta digitar o seguinte comando: `dfdfd`
+Após estar na pasta basta digitar o seguinte comando: ``
 
 Dessa forma já será compilado a DDL no qual podemos usar para carregar no banco de dados, e ser disponibilizada como uma função para ser utilizada. 
 
