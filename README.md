@@ -30,7 +30,7 @@ Após estar na pasta basta digitar o seguinte comando (o caminho tem que ser o c
 
 Dessa forma já será compilado a DDL no qual podemos usar para carregar no banco de dados, e ser disponibilizada como uma função para ser utilizada. 
 
-Fonte: Para essa compilação, caso tenha mais dúvidas pode seguir o tutorial direto da Microsoft com maiores detalhes, [a0cesse aqui](https://docs.microsoft.com/pt-br/sql/relational-databases/clr-integration/database-objects/getting-started-with-clr-integration?view=sql-server-ver15). 
+Fonte: Para essa compilação, caso tenha mais dúvidas pode seguir o tutorial direto da Microsoft com maiores detalhes, [acesse aqui](https://docs.microsoft.com/pt-br/sql/relational-databases/clr-integration/database-objects/getting-started-with-clr-integration?view=sql-server-ver15). 
 
 ##
 
@@ -40,10 +40,10 @@ Para conseguirmos utilizar a DLL temos que seguir os seguintes passos:
 
 Passo 1
 
-Primeiramente temos que habilitar o CLR em nossa base de dados, atráves do comando:
+Primeiramente temos que habilitar o CLR em nossa base de dados, atráves do comando (Em todos os exemplos será utilizado o banco de dados de exemplo `dbfunction`):
 
 ```
-USE dbfunction /*Deve ser feito USE no banco ao quer efetuar os procedimentos*/
+USE dbfunction
 GO
 -- habilitando o CLR
 sp_configure 'clr enabled', 1
@@ -52,7 +52,6 @@ GO
 --RECONFIGURE
 RECONFIGURE WITH OVERRIDE
 GO
-
 ```
 
 Passo 2
@@ -73,7 +72,6 @@ END
 GO
 CREATE ASSEMBLY clrConversorHexadecimal FROM 'C:\Users\Administrator\Desktop\clr\clrConversorHexadecimal.dll' WITH PERMISSION_SET = SAFE
 GO
-
 ```
 
 Obs: Substitua o caminho de exemplo acima, para o caminho no qual o seu servidor tenha acesso a ler o arquivo. 
@@ -84,11 +82,9 @@ Passo 3
 Após os passos acima, valide se a importação foi bem sucedida com o comando abaixo, você verá que ela fica como um Assembly no Banco de dados. 
 
 ```
-
 USE dbfunction
 GO
 SELECT * FROM sys.assemblies
-
 ```
 
 Passo 4 
@@ -96,7 +92,6 @@ Passo 4
 Após importar a DLL ainda é necessário fazer a criação da função que vamos usar para acessar a DLL. Use o exemplo abaixo para criar a função:
 
 ```
-
 USE dbfunction
 GO
 CREATE FUNCTION fnc_clr_conversor_hexadecimal
@@ -109,7 +104,6 @@ RETURNS NVARCHAR(MAX)
 AS
 EXTERNAL NAME clrConversorHexadecimal.[UserDefinedFunctions].[clrConversorHexadecimal]
 GO
-
 ```
 
 Após os passos acima a função já está apta a ser utilizada. 
@@ -125,14 +119,12 @@ Veja como passar os dados para que a função processe, é necessário passar o 
 
 ```
 SELECT dbfunction.dbo.fnc_clr_conversor_hexadecimal(N'اختبار الوظيفة', 'convertHex', '_')
-
 ```
 
 #### Chamando a função para conversão de hexadecimal para string novamente:
 
 ```
 SELECT dbfunction.dbo.fnc_clr_conversor_hexadecimal(N'_D8_A7_D8_AE_D8_AA_D8_A8_D8_A7_D8_B1_20_D8_A7_D9_84_D9_88_D8_B8_D9_8A_D9_81_D8_A9', 'convertString', '_')
-
 ```
 
 OBs: é necessário obrigatoriamente ter um separador, caso seja necessário você poderá customizar a função da forma que preferir mudando o separador, ou retirando a sua necessidade, porém lembre-se de ajustar os locais no qual validam 3 casos decimais, do contrário a função não terá o resultado esperado.
@@ -150,7 +142,6 @@ SELECT @textHex AS Hexadecimal
 
 SELECT @textSTR = dbfunction.dbo.fnc_clr_conversor_hexadecimal(@textHex, 'convertString', '_')
 SELECT @textSTR AS TextOriginal
-
 ```
 
 #### Retorno
@@ -160,7 +151,6 @@ SELECT @textSTR AS TextOriginal
 #### Exemplo de utilização com tabelas (aqui no exemplo foi feito uma tabela inline só de demonstração)
 
 ```
-
 SELECT result = dbfunction.dbo.fnc_clr_conversor_hexadecimal(test.field, 'convertHex', '_')
 FROM   (   SELECT N'Arábe' AS field
            UNION ALL
@@ -175,7 +165,6 @@ FROM   (   SELECT N'Arábe' AS field
            SELECT N'Ar_C3_A1_62_65'
            UNION ALL
            SELECT N'_41_72_C3_A1_62_65') test
-
 ```
 
 #### Retorno
