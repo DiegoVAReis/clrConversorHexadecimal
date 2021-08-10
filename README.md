@@ -26,7 +26,7 @@ Após estar na pasta basta digitar o seguinte comando (o caminho tem que ser o c
 
 `C:\Windows\Microsoft.NET\Framework\v3.5\csc.exe /target:library ..\clrConversorHexadecimal.cs`
 
-[Compilando](screenshots/compilation.png)
+![Compilando](screenshots/compilation.png)
 
 Dessa forma já será compilado a DDL no qual podemos usar para carregar no banco de dados, e ser disponibilizada como uma função para ser utilizada. 
 
@@ -146,7 +146,7 @@ SELECT @textSTR AS TextOriginal
 
 #### Retorno
 
-[Resultado 1](screenshots/testResult.png)
+![Resultado 1](screenshots/testResult.png)
 
 #### Exemplo de utilização com tabelas (aqui no exemplo foi feito uma tabela inline só de demonstração)
 
@@ -169,7 +169,7 @@ FROM   (   SELECT N'Arábe' AS field
 
 #### Retorno
 
-[Resultado 2](screenshots/testResultTwo.png)
+![Resultado 2](screenshots/testResultTwo.png)
 
 Viu como é simples? Bora usar então, e aproveitar. 
 
