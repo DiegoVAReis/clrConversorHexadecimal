@@ -2,9 +2,13 @@
 
 ## Conversor de String para Hexadecimal e de Hexadecimal para String
 
-Este projeto é uma CLR SQL Function, onde após a geração da DLL, ela pode ser importada no banco de dados SQL Server (2008 ou superior), sendo uma função na qual é possível converter strings para hexadecimal. Por exemplo pode ser usada para converter caracteres arábes em hexadecimal, e com isso salvar no banco de dados apenas o valor em hexadecimal, e na hora de exibir esses dados isso ser convertido e mostrado para o usuário normalmente. 
+Este projeto é uma CLR (Common Language Runtime) - SQL Function, no qual geramos uma DLL e importamos a mesma no banco de dados SQL Server (2008 ou superior), sendo uma função na qual é possível converter strings para hexadecimal. 
 
-Com o intuito de não se prender a IDEs, e não ser necessário ter o Visual Studio instalado, foi disponibilizado apenas o arquivo .cs principal, e através dele podemos gerar nossa DLL que será importada no banco de dados. Caso não queira realizar a compilação pode ser utilizada a DLL já compilada aqui disponível na área de Release. 
+Podemos usar por exemplo para converter caracteres arábes em hexadecimal, salvando no banco de dados apenas o valor em hexadecimal, na hora de retornar esses dados na aplicação, convertemos para uma string novamente e exibimos normalmente. 
+
+Com o intuito de não se prender a IDEs, e não ser necessário possuir o Visual Studio instalado, disponibilizarei apenas o arquivo (.cs) principal, e através dele podemos gerar a DLL que será importada no banco de dados. 
+
+Caso não queira realizar a compilação pode ser utilizada a DLL já compilada, disponível na pasta "Build" ou na área de Release. 
 
 Após esse contexto geral, vamos lá, irei separar em dois temas, primeiro a compilação da DLL e depois como instalar ela no banco de dados e usar: 
 
@@ -12,35 +16,35 @@ Após esse contexto geral, vamos lá, irei separar em dois temas, primeiro a com
 
 1. Ter o .Net Framework 3.5 instalado (Pode ser baixado atráves desse link oficial da [Microsoft](https://www.microsoft.com/pt-br/download/details.aspx?id=21))
 
-Passo 1. 
+#### Passo 1. 
 
 Com o .Net Framework 3.5 instalado na máquina é necessário verificar o caminho no qual foi feita a instalação. Geralmente fica no caminho abaixo:
 
 `C:\Windows\Microsoft.NET\Framework\v3.5`
 
-Passo 2. 
+#### Passo 2. 
 
-Abra o PowerShell (se estiver no Windows) e entre na pasta "Build" que esta dentro da pasta do projeto no qual fez o clone ou download.
+Abra o PowerShell (se estiver no Windows) e entre na pasta "build" que está dentro da pasta do projeto (no qual fez o clone ou download).
 
-Após estar na pasta basta digitar o seguinte comando (o caminho tem que ser o caminho da sua instação) e apertar Enter: 
+Após estar na pasta "build" basta digitar o seguinte comando (o caminho tem que ser o caminho da sua instação) e apertar Enter: 
 
 `C:\Windows\Microsoft.NET\Framework\v3.5\csc.exe /target:library ..\clrConversorHexadecimal.cs`
 
 ![Compilando](screenshots/compilation.png)
 
-Dessa forma já será compilado a DDL no qual podemos usar para carregar no banco de dados, e ser disponibilizada como uma função para ser utilizada. 
+Dessa forma já será compilado a DDL dentro da pasta, no qual podemos usar para carregar no banco de dados, e ser disponibilizada como uma função para ser utilizada. 
 
 Fonte: Para essa compilação, caso tenha mais dúvidas pode seguir o tutorial direto da Microsoft com maiores detalhes, [acesse aqui](https://docs.microsoft.com/pt-br/sql/relational-databases/clr-integration/database-objects/getting-started-with-clr-integration?view=sql-server-ver15). 
 
 ##
 
-### Como utilizar a DLL e importar o CLR no banco de dados?
+### Importar a DLL (CLR) no banco de dados e utilizar
 
-Para conseguirmos utilizar a DLL temos que seguir os seguintes passos:
+Para conseguirmos utilizar/importar a DLL temos que seguir os seguintes passos:
 
-Passo 1
+#### Passo 1
 
-Primeiramente temos que habilitar o CLR em nossa base de dados, atráves do comando (Em todos os exemplos será utilizado o banco de dados de exemplo `dbfunction`):
+Primeiramente temos que habilitar o CLR em nossa base de dados (geralmente por padrão essa configuração é desabilitada por questões de segurança), atráves do comando (Em todos os exemplos será utilizado o banco de dados de exemplo `dbfunction`):
 
 ```
 USE dbfunction
@@ -54,7 +58,7 @@ RECONFIGURE WITH OVERRIDE
 GO
 ```
 
-Passo 2
+#### Passo 2
 
 Com o CLR habilitado precisamos importar a DLL, e para isso a DLL deve estar em alguma passa que o Servidor tenha acesso. Com isso iremos digitar o seguinte comando:
 
@@ -77,7 +81,7 @@ GO
 Obs: Substitua o caminho de exemplo acima, para o caminho no qual o seu servidor tenha acesso a ler o arquivo. 
 
 
-Passo 3
+#### Passo 3
 
 Após os passos acima, valide se a importação foi bem sucedida com o comando abaixo, você verá que ela fica como um Assembly no Banco de dados. 
 
@@ -87,7 +91,7 @@ GO
 SELECT * FROM sys.assemblies
 ```
 
-Passo 4 
+#### Passo 4 
 
 Após importar a DLL ainda é necessário fazer a criação da função que vamos usar para acessar a DLL. Use o exemplo abaixo para criar a função:
 
@@ -172,6 +176,9 @@ FROM   (   SELECT N'Arábe' AS field
 ![Resultado 2](screenshots/testResultTwo.png)
 
 Viu como é simples? Bora usar então, e aproveitar. 
+
+
+OBs: Por segurança apenas importe DLL confiáveis ao seu banco de dados, e que você tenha acesso ao seu conteúdo.
 
 
 
