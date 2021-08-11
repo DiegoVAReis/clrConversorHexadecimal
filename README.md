@@ -46,7 +46,7 @@ Para conseguirmos utilizar/importar a DLL temos que seguir os seguintes passos:
 
 Primeiramente temos que habilitar o CLR em nossa base de dados (geralmente por padrão essa configuração é desabilitada por questões de segurança), atráves do comando (Em todos os exemplos será utilizado o banco de dados de exemplo `dbfunction`):
 
-```
+```sql
 USE dbfunction
 GO
 -- habilitando o CLR
@@ -62,7 +62,7 @@ GO
 
 Com o CLR habilitado precisamos importar a DLL, e para isso a DLL deve estar em alguma passa que o Servidor tenha acesso. Com isso iremos digitar o seguinte comando:
 
-```
+```sql
 USE dbfunction
 go
 -- Publishing Assembly
@@ -85,7 +85,7 @@ Obs: Substitua o caminho de exemplo acima, para o caminho no qual o seu servidor
 
 Após os passos acima, valide se a importação foi bem sucedida com o comando abaixo, você verá que ela fica como um Assembly no Banco de dados. 
 
-```
+```sql
 USE dbfunction
 GO
 SELECT * FROM sys.assemblies
@@ -95,7 +95,7 @@ SELECT * FROM sys.assemblies
 
 Após importar a DLL ainda é necessário fazer a criação da função que vamos usar para acessar a DLL. Use o exemplo abaixo para criar a função:
 
-```
+```sql
 USE dbfunction
 GO
 CREATE FUNCTION fnc_clr_conversor_hexadecimal
@@ -121,13 +121,13 @@ Veja como passar os dados para que a função processe, é necessário passar o 
 
 #### Chamando a função para conversão em hexadecimal:
 
-```
+```sql
 SELECT dbfunction.dbo.fnc_clr_conversor_hexadecimal(N'اختبار الوظيفة', 'convertHex', '_')
 ```
 
 #### Chamando a função para conversão de hexadecimal para string novamente:
 
-```
+```sql
 SELECT dbfunction.dbo.fnc_clr_conversor_hexadecimal(N'_D8_A7_D8_AE_D8_AA_D8_A8_D8_A7_D8_B1_20_D8_A7_D9_84_D9_88_D8_B8_D9_8A_D9_81_D8_A9', 'convertString', '_')
 ```
 
@@ -137,7 +137,7 @@ Ah!! Outro ponto importante é que o mesmo separador usado na conversão, é nec
 
 Veja exemplos de uso:
 
-```
+```sql
 DECLARE @textHex NVARCHAR(4000), 
 		@textSTR NVARCHAR(4000)
 
@@ -154,7 +154,7 @@ SELECT @textSTR AS TextOriginal
 
 #### Exemplo de utilização com tabelas (aqui no exemplo foi feito uma tabela inline só de demonstração)
 
-```
+```sql
 SELECT result = dbfunction.dbo.fnc_clr_conversor_hexadecimal(test.field, 'convertHex', '_')
 FROM   (   SELECT N'Arábe' AS field
            UNION ALL
