@@ -20,7 +20,9 @@ Após esse contexto geral, vamos lá, irei separar em dois temas, primeiro a com
 
 Com o .Net Framework 3.5 instalado na máquina é necessário verificar o caminho no qual foi feita a instalação. Geralmente fica no caminho abaixo:
 
-`C:\Windows\Microsoft.NET\Framework\v3.5`
+```shell
+C:\Windows\Microsoft.NET\Framework\v3.5
+```
 
 #### Passo 2. 
 
@@ -28,7 +30,9 @@ Abra o PowerShell (se estiver no Windows) e entre na pasta "build" que está den
 
 Após estar na pasta "build" basta digitar o seguinte comando (o caminho tem que ser o caminho da sua instação) e apertar Enter: 
 
-`C:\Windows\Microsoft.NET\Framework\v3.5\csc.exe /target:library ..\clrConversorHexadecimal.cs`
+```shell
+C:\Windows\Microsoft.NET\Framework\v3.5\csc.exe /target:library ..\clrConversorHexadecimal.cs
+```
 
 ![Compilando](screenshots/compilation.png)
 
