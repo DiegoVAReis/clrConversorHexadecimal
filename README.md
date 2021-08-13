@@ -8,7 +8,7 @@ Podemos usar por exemplo para converter caracteres arábes em hexadecimal, salva
 
 Com o intuito de não se prender a IDEs, e não ser necessário possuir o Visual Studio instalado, disponibilizarei apenas o arquivo (.cs) principal, e através dele podemos gerar a DLL que será importada no banco de dados. 
 
-Caso não queira realizar a compilação pode ser utilizada a DLL já compilada, disponível na pasta "Build" ou na área de Release. 
+Caso não queira realizar a compilação pode ser utilizada a DLL já compilada, disponível na área de Release. 
 
 Após esse contexto geral, vamos lá, irei separar em dois temas, primeiro a compilação da DLL e depois como instalar ela no banco de dados e usar: 
 
@@ -26,12 +26,12 @@ C:\Windows\Microsoft.NET\Framework\v3.5
 
 #### Passo 2. 
 
-Abra o PowerShell (se estiver no Windows) e entre na pasta "build" que está dentro da pasta do projeto (no qual fez o clone ou download).
+Abra o PowerShell (se estiver no Windows) e entre na pasta do projeto (no qual fez o clone ou download).
 
-Após estar na pasta "build" basta digitar o seguinte comando (o caminho tem que ser o caminho da sua instação) e apertar Enter: 
+Após estar na pasta basta digitar o seguinte comando (o caminho tem que ser o caminho da sua instação) e apertar Enter: 
 
 ```shell
-C:\Windows\Microsoft.NET\Framework\v3.5\csc.exe /target:library ..\clrConversorHexadecimal.cs
+C:\Windows\Microsoft.NET\Framework\v3.5\csc.exe /target:library clrConversorHexadecimal.cs
 ```
 
 ![Compilando](screenshots/compilation.png)
