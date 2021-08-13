@@ -19,8 +19,8 @@ jobs:
         run: |
           C:\Windows\Microsoft.NET\Framework\v3.5\csc.exe /target:library clrConversorHexadecimal.cs
           
-      - name: Upload artifact
-        uses: actions/upload-artifact@v1.0.0
+      - name: Upload artifact        
+        uses: actions/upload-artifact@v2
         with:
           name: clrConversorHexadecimal
-          path: "./build"  
+          path: clrConversorHexadecimal.dll
