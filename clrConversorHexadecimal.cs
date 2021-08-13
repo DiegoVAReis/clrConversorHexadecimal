@@ -9,7 +9,7 @@ public partial class UserDefinedFunctions
     {
         /////////////////////////////////////////////////////////////////////////////////////////////
         //                                                                                         //
-        //  Função Main --> Responsável por direcionar o Fluxo para as outras funções internas.    //
+        //  Função Main --> Responsável por direcionar o Fluxo para as outras funções internas..    //
         //  Desenvolvido por: https://github.com/DiegoVAReis                                       //
         //                                                                                         //
         /////////////////////////////////////////////////////////////////////////////////////////////
