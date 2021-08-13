@@ -9,17 +9,12 @@ on:
 jobs:
   build:
     name: Job para gerar a DLL
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Build Solution
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          C:\Windows\Microsoft.NET\Framework\v3.5\csc.exe /target:library clrConversorHexadecimal.cs
