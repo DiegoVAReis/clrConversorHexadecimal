@@ -3,7 +3,7 @@ name: Compilar a DDL
 on:
   push:
     tags :
-      - 'v*.*'
+      - 'v*.*.*'
 
 jobs:
   build:
