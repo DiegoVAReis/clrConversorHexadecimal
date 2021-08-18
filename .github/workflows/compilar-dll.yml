@@ -13,11 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # Realiza o build da DLL
-      - name: Build Solution
-        run: |
-          C:\Windows\Microsoft.NET\Framework\v3.5\csc.exe /target:library clrConversorHexadecimal.cs
-      
       # Cria a release  
       - name: release
         uses: actions/create-release@v1
@@ -30,6 +25,11 @@ jobs:
           body_path: CHANGELOG.md
         env:
           GITHUB_TOKEN: ${{ github.token }}  
+      
+      # Realiza o build da DLL
+      - name: Build Solution
+        run: |
+          C:\Windows\Microsoft.NET\Framework\v3.5\csc.exe /target:library clrConversorHexadecimal.cs
       
       # Sobe o arquivo junto na release, já compilado.
       - name: upload artifact
