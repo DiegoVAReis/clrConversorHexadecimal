@@ -1,0 +1,1 @@
+* Correção da pipeline de geração da release
