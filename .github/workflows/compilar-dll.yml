@@ -13,13 +13,31 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # Runs a single command using the runners shell
+      # Realiza o build da DLL
       - name: Build Solution
         run: |
           C:\Windows\Microsoft.NET\Framework\v3.5\csc.exe /target:library clrConversorHexadecimal.cs
-          
-      - name: Upload artifact        
-        uses: actions/upload-artifact@v2
+      
+      # Cria a release  
+      - name: release
+        uses: actions/create-release@v1
+        id: create_release
         with:
-          name: clrConversorHexadecimal
-          path: clrConversorHexadecimal.dll
+          draft: false
+          prerelease: false
+          release_name: ${{ github.ref }}
+          tag_name: ${{ github.ref }}
+          body_path: CHANGELOG.md
+        env:
+          GITHUB_TOKEN: ${{ github.token }}  
+      
+      # Sobe o arquivo junto na release, já compilado.
+      - name: upload artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: clrConversorHexadecimal.dll
+          asset_name: clrConversorHexadecimal.zip
+          asset_content_type: application/zip
